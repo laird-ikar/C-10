@@ -6,11 +6,10 @@
 /*   By: bguyot <bguyot@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 10:55:11 by bguyot            #+#    #+#             */
-/*   Updated: 2021/11/30 15:08:39 by bguyot           ###   ########.fr       */
+/*   Updated: 2021/12/02 15:00:32 by bguyot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "ft_cat.h"
 #include <unistd.h>
 #include <fcntl.h>
