@@ -6,7 +6,7 @@
 /*   By: bguyot <bguyot@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 10:55:11 by bguyot            #+#    #+#             */
-/*   Updated: 2021/11/30 10:55:19 by bguyot           ###   ########.fr       */
+/*   Updated: 2021/11/30 15:08:39 by bguyot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,16 @@ void	ft_read_input(void)
 
 	while (read(0, &buffer, 1))
 		write(1, &buffer, 1);
+}
+
+int	ft_strlen(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
 }

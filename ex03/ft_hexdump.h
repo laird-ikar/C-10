@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cat.h                                           :+:      :+:    :+:   */
+/*   ft_hexdump.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bguyot <bguyot@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/30 10:55:28 by bguyot            #+#    #+#             */
-/*   Updated: 2021/11/30 15:08:54 by bguyot           ###   ########.fr       */
+/*   Created: 2021/12/02 08:31:38 by bguyot            #+#    #+#             */
+/*   Updated: 2021/12/02 11:15:53 by bguyot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_CAT_H
-# define FT_CAT_H
+#ifndef FT_HEXDUMP_H
+# define FT_HEXDUMP_H
 
-void	ft_read_files(char *file);
-void	ft_read_input(void);
-int		ft_strlen(char *str);
+# include <stdlib.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <sys/errno.h>
+# include <string.h>
+
+void			print_hexa(int addr, int i);
+void			print_hexa_content(char c);
+void			print_read_content(char c);
 
 #endif

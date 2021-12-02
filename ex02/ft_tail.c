@@ -6,25 +6,30 @@
 /*   By: bguyot <bguyot@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 10:56:03 by bguyot            #+#    #+#             */
-/*   Updated: 2021/11/30 10:56:04 by bguyot           ###   ########.fr       */
+/*   Updated: 2021/12/01 15:05:14 by bguyot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "ft_tail.h"
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <sys/errno.h>
-#include <string.h>
 
 int	main(int argc, char *argv[])
 {
-	int	i;
-	int	file_size;
+	int		file_size;
+	int		fd;
+	char	buffer;
 
 	if (argc < 4)
-		ft_read_input(ft_atoi(argv[2]));
+	{
+		fd = open("temp", O_RDWR | O_TRUNC);
+		while (read(0, &buffer, 1) && buffer != 13)
+		{
+			write(fd, &buffer, 1);
+		}
+		close(fd);
+		file_size = ft_count_file_size("temp");
+		ft_read_files("temp", file_size, ft_atoi(argv[2]));
+	}
 	else if (argc == 4)
 	{
 		file_size = ft_count_file_size(argv[3]);
@@ -32,18 +37,7 @@ int	main(int argc, char *argv[])
 	}
 	else
 	{
-		i = 3;
-		while (argv[i])
-		{
-			file_size = ft_count_file_size(argv[i]);
-			write(1, "==> ", 4);
-			write(1, argv[i], file_size + 1);
-			write(1, " <==\n", 5);
-			ft_read_files(argv[3], file_size, ft_atoi(argv[2]));
-			if (argv[i + 1])
-				write(1, "\n", 2);
-			i++;
-		}
+		ft_read_mult(argv, &file_size);
 	}
 }
 
@@ -98,29 +92,20 @@ int	ft_count_file_size(char *file)
 	return (i + 1);
 }
 
-void	ft_read_input(int n)
+void	ft_read_mult(char **strs, int *file_size)
 {
-	char	buffer;
-	char	*tab;
-	int		size;
-	int		i;
+	int	i;
 
-	size = 0;
-	i = 0;
-	write(1, "read_input\n", 11);
-	while (read(0, &buffer, 1))
-		size++;
-	tab = malloc(sizeof(char) * size + 1);
-	while (read(0, &buffer, 1))
+	i = 3;
+	while (strs[i])
 	{
-		tab[i] = buffer;
-		i++;
-	}
-	i = 0;
-	while (read(0, &buffer, 1))
-	{
-		if (i >= size - n - 1)
-			write(1, &(tab[i]), 1);
+		*file_size = ft_count_file_size(strs[i]);
+		write(1, "==> ", 4);
+		write(1, strs[i], *file_size + 1);
+		write(1, " <==\n", 5);
+		ft_read_files(strs[3], *file_size, ft_atoi(strs[2]));
+		if (strs[i + 1])
+			write(1, "\n", 2);
 		i++;
 	}
 }
